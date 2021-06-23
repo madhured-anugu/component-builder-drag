@@ -1,0 +1,7 @@
+<div *ngFor="let comp of components"
+  class="mt-4 max-w-sm rounded overflow-hidden shadow-lg border-pink-900 border-b-4 p-4 cursor-pointer hover:border-pink-400">
+  <div draggable="true" class=".draggable">
+
+    <app-dynamic [item]="comp"> </app-dynamic>
+  </div>
+</div>

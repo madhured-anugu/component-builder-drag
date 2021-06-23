@@ -13,6 +13,7 @@ import { DynamicComponent } from './dynamic/dynamic.component';
 import { ToolContentComponent } from './tool-content/tool-content.component';
 import { ToolHeaderComponent } from './tool-header/tool-header.component';
 import { DraggableDirective } from './draggable.directive';
+import { DroppableDirective } from './droppable.directive';
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
@@ -26,7 +27,8 @@ import { DraggableDirective } from './draggable.directive';
     DynamicComponent,
     ToolContentComponent,
     ToolHeaderComponent,
-    DraggableDirective
+    DraggableDirective,
+    DroppableDirective
   ],
   bootstrap: [AppComponent],
   providers: [ ]
