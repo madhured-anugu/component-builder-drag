@@ -1,0 +1,7 @@
+.border-b-pink-900 {
+  border-bottom-color: rgb(131, 24, 67);
+}
+
+.hover\:border-b-pink-400:hover {
+  border-bottom-color: rgba(244, 114, 182);
+}
