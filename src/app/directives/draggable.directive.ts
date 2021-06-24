@@ -1,11 +1,16 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import interact from 'interactjs';
 import { getClassStartsWith } from '.././utils/domUtils';
+import { DragModel } from '../model/dragModel';
+import { DragDropInteractionService } from '../services/drag-drop-interaction.service';
 @Directive({
   selector: '[draggable]'
 })
 export class DraggableDirective implements AfterViewInit {
-  constructor(private element: ElementRef) {}
+  constructor(
+    private element: ElementRef,
+    private interactionService: DragDropInteractionService
+  ) {}
   ngAfterViewInit(): void {
     (window as any).dragMoveListener = event => {
       const target = event.target;
@@ -40,19 +45,7 @@ export class DraggableDirective implements AfterViewInit {
           move: (window as any).dragMoveListener,
 
           // call this function on every dragend event
-          end(event) {
-            const canDrop = event.target.classList.contains('can-drop');
-            const dropParentCls = getClassStartsWith(
-              event.target,
-              'dropParent-'
-            );
-            const dragCls = getClassStartsWith(event.target, 'drag-');
-            if (canDrop) {
-              debugger;
-              console.log('drag: ' + dragCls + ' drop: ' + dropParentCls);
-            }
-            //  event.target.remove();
-          }
+          end: this.onDragEnd
         }
       })
       .on('move', event => {
@@ -75,4 +68,20 @@ export class DraggableDirective implements AfterViewInit {
         }
       });
   }
+
+  onDragEnd = event => {
+    const canDrop = event.target.classList.contains('can-drop');
+    const dropParentCls = getClassStartsWith(event.target, 'dropParent-');
+    const dragCls = getClassStartsWith(event.target, 'drag-');
+    if (canDrop) {
+      console.log('drag: ' + dragCls + ' drop: ' + dropParentCls);
+      const data: DragModel = {
+        dragType: dragCls,
+        dropType: dropParentCls
+      };
+      this.interactionService.sendDragComplete(data);
+    }
+
+    // event.target.remove();
+  };
 }
