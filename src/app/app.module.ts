@@ -12,8 +12,8 @@ import { DynamicCompDirective } from './dynamic-comp.directive';
 import { DynamicComponent } from './dynamic/dynamic.component';
 import { ToolContentComponent } from './tool-content/tool-content.component';
 import { ToolHeaderComponent } from './tool-header/tool-header.component';
-import { DraggableDirective } from './draggable.directive';
-import { DroppableDirective } from './droppable.directive';
+import { DraggableDirective } from './directives/draggable.directive';
+import { DroppableDirective } from './directives/droppable.directive';
 
 @NgModule({
   imports: [BrowserModule, FormsModule],
@@ -31,6 +31,6 @@ import { DroppableDirective } from './droppable.directive';
     DroppableDirective
   ],
   bootstrap: [AppComponent],
-  providers: [ ]
+  providers: []
 })
 export class AppModule {}

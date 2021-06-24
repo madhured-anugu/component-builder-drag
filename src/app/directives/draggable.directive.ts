@@ -1,5 +1,6 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 import interact from 'interactjs';
+import { getClassStartsWith } from '.././utils/domUtils';
 @Directive({
   selector: '[draggable]'
 })
@@ -7,10 +8,10 @@ export class DraggableDirective implements AfterViewInit {
   constructor(private element: ElementRef) {}
   ngAfterViewInit(): void {
     (window as any).dragMoveListener = event => {
-      var target = event.target;
+      const target = event.target;
       // keep the dragged position in the data-x/data-y attributes
-      var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-      var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+      const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+      const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
       // translate the element
       target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
@@ -20,7 +21,7 @@ export class DraggableDirective implements AfterViewInit {
       target.setAttribute('data-y', y);
     };
     const elem = this.element.nativeElement;
-    debugger;
+
     interact(elem)
       .draggable({
         // enable inertial throwing
@@ -41,9 +42,16 @@ export class DraggableDirective implements AfterViewInit {
           // call this function on every dragend event
           end(event) {
             const canDrop = event.target.classList.contains('can-drop');
-            if (!canDrop) {
-              event.target.remove();
+            const dropParentCls = getClassStartsWith(
+              event.target,
+              'dropParent-'
+            );
+            const dragCls = getClassStartsWith(event.target, 'drag-');
+            if (canDrop) {
+              debugger;
+              console.log('drag: ' + dragCls + ' drop: ' + dropParentCls);
             }
+            //  event.target.remove();
           }
         }
       })
