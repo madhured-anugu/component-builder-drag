@@ -81,7 +81,7 @@ export class DraggableDirective implements AfterViewInit {
       };
       this.interactionService.sendDragComplete(data);
     }
-
-    // event.target.remove();
+    interact(event.target).unset();
+    event.target.remove();
   };
 }

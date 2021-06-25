@@ -14,7 +14,10 @@ import { ToolContentComponent } from './tool-content/tool-content.component';
 import { ToolHeaderComponent } from './tool-header/tool-header.component';
 import { DraggableDirective } from './directives/draggable.directive';
 import { DroppableDirective } from './directives/droppable.directive';
-
+import { DropAreaComponent } from './drop-area/drop-area.component';
+import { FullTabComponent } from './full-tab/full-tab.component';
+import { ResizableDirective } from './directives/resizable.directive';
+import { NonCopyDraggableDirective } from './directives/noncopy-draggable.directive';
 @NgModule({
   imports: [BrowserModule, FormsModule],
   declarations: [
@@ -28,7 +31,11 @@ import { DroppableDirective } from './directives/droppable.directive';
     ToolContentComponent,
     ToolHeaderComponent,
     DraggableDirective,
-    DroppableDirective
+    DroppableDirective,
+    DropAreaComponent,
+    FullTabComponent,
+    ResizableDirective,
+    NonCopyDraggableDirective
   ],
   bootstrap: [AppComponent],
   providers: []

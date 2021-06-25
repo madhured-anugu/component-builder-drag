@@ -1,4 +1,10 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { CompInterface } from '../comp-interface';
 import { DynamicCompDirective } from '../dynamic-comp.directive';
 import { DynamicItem } from '../dynamic-item';
@@ -8,27 +14,25 @@ import { DynamicItem } from '../dynamic-item';
   templateUrl: './dynamic.component.html',
   styleUrls: ['./dynamic.component.css']
 })
-export class DynamicComponent implements OnInit {
+export class DynamicComponent {
+  @Input() item: DynamicItem;
 
-  @Input() item:DynamicItem;
-  
-  @ViewChild(DynamicCompDirective, {static: true}) dynamicHost!: DynamicCompDirective;
+  // @ViewChild(DynamicCompDirective, {static: true}) dynamicHost!: DynamicCompDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  // constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
-  ngOnInit() {
-    this.loadComponent();
-  }
+  // ngOnInit() {
+  //   this.loadComponent();
+  // }
 
-  loadComponent(){
+  // loadComponent(){
 
-    const item =  this.item;
-    const compFactory = this.componentFactoryResolver.resolveComponentFactory(item.component);
-    const viewContainerRef = this.dynamicHost.viewContainerRef;
-    viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<CompInterface>(compFactory);
-    componentRef.instance.data = item.data;
+  //   const item =  this.item;
+  //   const compFactory = this.componentFactoryResolver.resolveComponentFactory(item.component);
+  //   const viewContainerRef = this.dynamicHost.viewContainerRef;
+  //   viewContainerRef.clear();
+  //   const componentRef = viewContainerRef.createComponent<CompInterface>(compFactory);
+  //   componentRef.instance.data = item.data;
 
-  }
-
+  // }
 }
